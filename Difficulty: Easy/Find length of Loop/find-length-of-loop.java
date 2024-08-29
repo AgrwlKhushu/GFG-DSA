@@ -75,22 +75,31 @@ class Solution {
     // Function to find the length of a loop in the linked list.
     public int countNodesinLoop(Node head) {
         // Add your code here.
-        Node slow=head;
-        Node fast=head;
-        while(fast!=null && fast.next!=null){
-            slow=slow.next;
-            fast=fast.next.next;
-            if(slow==fast){
+        Node slow = head;
+        Node fast = head;
+        int cnt = 0;
+        boolean cycle = false;
+        while(fast != null && fast.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast){
+                cycle = true;
                 break;
             }
         }
-        if(fast==null || fast.next==null) return 0;
-        int x=1;
-        slow=slow.next;
-        while(slow!=fast){
-            x++;
-            slow=slow.next;
+        
+        if( cycle == false){
+            return 0;
         }
-        return x;
+        
+        else{
+            slow = slow.next;
+            while(slow != fast){
+                slow = slow.next;
+                cnt++;
+            }
+        }
+        
+        return cnt + 1;
     }
 }
