@@ -33,14 +33,21 @@ class GFG {
 class Solution {
     public int maxXor(int[] arr) {
         // code here
-        int ans = Integer.MIN_VALUE;
-        int n = arr.length;
-        
-        for(int i=0; i<n-1; i++) {
-            for(int j=i+1; j<n; j++) {
-                ans = Math.max(ans, arr[i] ^ arr[j]);
+        int mask=0, max=0;
+        for(int i=31;i>=0;i--){
+            mask=mask | (1<<i);
+            Set<Integer> set= new HashSet<>();
+            for(int n:arr)
+                set.add(mask & n);
+               
+            int tmp = max | (1<< i);
+            for(int prefix : set){
+                if(set.contains(tmp ^ prefix)){
+                    max = tmp;
+                    break ;
+                }
             }
         }
-        return ans;
+        return max;
     }
 }
