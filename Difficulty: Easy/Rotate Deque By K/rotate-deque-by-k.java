@@ -1,0 +1,17 @@
+class Solution {
+    public static void rotateDeque(Deque<Integer> dq, int type, int k) {
+        // code here
+        
+        int n = dq.size();
+        k = k % n;
+        if (type == 1) {
+            for (int i = 0; i < k; i++) {
+                dq.addFirst(dq.removeLast());
+            }
+        } else {
+            for (int i = 0; i < k; i++) {
+                dq.addLast(dq.removeFirst());
+            }
+        }
+    }
+}
