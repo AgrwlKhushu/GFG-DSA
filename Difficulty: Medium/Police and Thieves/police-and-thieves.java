@@ -1,34 +1,25 @@
 class Solution {
     public int catchThieves(char[] arr, int k) {
+        // code here
+        
         int n = arr.length;
-        Queue<Integer> police = new LinkedList<>();
-        Queue<Integer> thieves = new LinkedList<>();
-        int caught = 0;
-
-        for (int i = 0; i < n; i++) {
-            if (arr[i] == 'P') {
-                police.add(i);
-            } else if (arr[i] == 'T') {
-                thieves.add(i);
-            }
-
-            // Try to match police and thieves
-            while (!police.isEmpty() && !thieves.isEmpty()) {
-                int pol = police.peek();
-                int thief = thieves.peek();
-
-                if (Math.abs(pol - thief) <= k) {
-                    caught++;
-                    police.poll();
-                    thieves.poll();
-                } else if (thief < pol) {
-                    thieves.poll();
-                } else {
-                    police.poll();
-                }
+        int i = 0, j = 0;
+        int count = 0;
+        while (i < n && j < n) {
+            while (i < n && arr[i] != 'P') i++;
+            while (j < n && arr[j] != 'T') j++;
+            if (i < n && j < n && Math.abs(i - j) <= k) {
+                count++;
+                i++;
+                j++;
+            } else if (j < n && j < i) {
+                j++;
+            } else if (i < n && i < j) {
+                i++;
+            } else {
+                break;
             }
         }
-
-        return caught;
+        return count;
     }
 }
