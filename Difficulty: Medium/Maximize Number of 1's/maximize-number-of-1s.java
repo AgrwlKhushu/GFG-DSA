@@ -1,5 +1,7 @@
 class Solution {
     public int maxOnes(int arr[], int k) {
+        // code here
+        
         int left = 0, right = 0;
         int zeroCount = 0;
         int maxLen = 0;
